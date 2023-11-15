@@ -64,9 +64,9 @@ unsigned int convert(char *string) {
 
 	for (x = string ; *x != '\0' ; x++) {
 
-	  if (!isdigit(*x))
-	    return 0L;
-	  }
+	  	if (!isdigit(*x))
+	    	return 0L;
+	}
 
 	bet = strtoul(string, &endp, 10);
 
