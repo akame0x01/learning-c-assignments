@@ -44,9 +44,10 @@ static int getLineAndConvertToInt(char *prompt,char *buff,size_t sz) {
 	int bet;
 
 	bet = strtoul(buff,&endp,10);
+	printf("errno: %d && endp: %s && buff: %s && bet: %d",errno,endp,buff,bet);
 	errno = 0;
 	if(endp == buff || errno)
-		return ERR;
+		return errno;
 	
 	return bet;		 
 }
