@@ -5,6 +5,7 @@
 
 #define ERR 0
 #define OK 1
+#define INITIAL_CAPACITY 3
 
 static int getLine(char *prompt,char *buff,size_t sz) {
 	int ch,extra;
@@ -92,33 +93,31 @@ void calculeAverage(int arr[]) {
 }
 
 int main() {
-	int scoreArray[10] = {};
-	int rc,continueOrNot;
-	int i = 0;
-	char prompt[] = "Enter a test score here> ";
-	size_t arraySize = sizeof(scoreArray) / sizeof(scoreArray[1]);
-	char buff[11];
+	double *scores = malloc(INITIAL_CAPACITY * sizeof(double));
+	if(!scores)
+	{
+		puts("Failed to allocate memory.\n");
+		return 1;
+	}
 
-	while(i <= arraySize) {
+	int capacity = INITIAL_CAPACITY;
+	int numScores,rc;
+	char answer[] = "y";
+	char prompt[] = "Would you like to continue? y/n "; 
 
-		if( (rc = getLine(prompt,buff,sizeof(buff))) == 1) {
-			rc = convertLine(buff);
+	for(numScores = 0;strncmp(answer,"y",1) == 0;++numScores) {
 
-			if(rc != ERANGE) {
-				scoreArray[i] = rc;
-				i++;
-				continueOrNot = check();
-
-				if(continueOrNot == 0 || i > 9) {
-					
-					calculeAverage(scoreArray);
-					break;
-				}
-			} else {
-				puts("You insert a invalid value,try again!");
+		if(numScores == capacity) {
+			capacity *= 2;
+			scores = realloc(scores,capacity * sizeof(double));
+			if(!scores) {
+				puts("Failed to allocate memory.\n");
+				return 1;
 			}
-		} else {
-			puts("You insert a invalid value,try again!");
 		}
-	} 	
+
+
+	}
+
+
 }
