@@ -46,7 +46,7 @@ static int getLineAndConvert(char *prompt,char *buff,size_t sz) {
 	return bet;
 }
 
-double calculeAvarege(int arr[][5],int len) {
+double calculeAvarege(int arr[][5],int len,int *bestPlayer) {
 	int sums[5] = {0};
 	double averages[5] = {0};
 	double currentAverage;
@@ -56,28 +56,23 @@ double calculeAvarege(int arr[][5],int len) {
 	for(j = 0; j < 5;j++){
 		for(i = 0;i < len;i++) {
 			sums[j] += arr[i][j];
-			printf("sums[playerJ=%d](%d) += arr[matchI=%d][playerJ=%d](%d)",j,sums[j],i,j,arr[i][j]);
-	        printf("\t");
 		}
-		printf("\n======================================================================================\n");
 	}
 	
     for (x = 0; x < 5; x++) {
     	currentAverage = sums[x] / len;
     	averages[x] = currentAverage;
-    	printf("currentAverage: %2.f // sums[x=%d] = %d",currentAverage,x,sums[x]);
-    	printf("\t");
     }
 
     double max = averages[0];
 
-    for(y = 0; y < 5;x++) {
+    for(y = 0; y < 5;y++) {
     	if(averages[y] > max)
     		max = averages[y];
+    		*bestPlayer = y;
     }
 
 	return max;
-
 }
 
 /*Create a program that prompts the user to input scoring totals for 5 players during 4 basketball games. 
@@ -92,7 +87,9 @@ int main() {
 	char prompt2[] = "Enter scoring total for Player #1";
 	char temp[] = "2345";
 	char buff[11];
-	double bestPlayer;
+	double bestAverage;
+	int bestPlayer;
+	int *bestPlayerPointer = &bestPlayer;
 	int len,rc,j,i;
 
 	rc = getLineAndConvert(prompt1,buff,sizeof(buff));
@@ -122,8 +119,8 @@ int main() {
 		}
 	}
 
-	bestPlayer = calculeAvarege(arr,len);
-	printf("\nThe best player was %f",bestPlayer);
+	bestAverage = calculeAvarege(arr,len,bestPlayerPointer);
+	printf("Player #%d had the highest scoring average at %2.f points per game.\n",bestPlayer,bestAverage);
 
 	return 0;
 }

@@ -22,9 +22,9 @@ static int getLine(char *prompt,char *buff,size_t sz) {
 
 	size_t len = strlen(buff);
 
-	if (len < 2) {
+	if (len < 2) 
 		return ERR;
-	}
+	
 
 	if(buff[len - 1] != '\n') {
 		extra = 0;
