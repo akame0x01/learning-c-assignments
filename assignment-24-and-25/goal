@@ -1,0 +1,4 @@
+the goal here is create a file with 700 permission, this mean that only owner or root can access it, and write a string into it after using syscalls open and write
+
+http://codewiki.wikidot.com/c:system-calls:write
+http://codewiki.wikidot.com/c:system-calls:open

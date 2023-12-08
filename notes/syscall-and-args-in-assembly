@@ -1,0 +1,22 @@
+If you are using int $0x80 (the 32-bit ABI with call numbers from asm/unistd_32.h), then you should use eax for the syscall number, and ebx, ecx, edx, esi, edi, and ebp for the parameters (in that order).
+
+If you are using the syscall instruction (the 64-bit ABI with native call numbers from asm/unistd.h), you should use rax for the syscall number and rdi, rsi, rdx, r10, r8, and r9 for the parameters.
+
+imagine this function: f(a,b,c), you really need to push the arguments 'somewhere'.
+you can pass it args a,b and c to register and or push them to stack
+
+f(a,b,c);
+register:  left -> right
+    mov ebx, a
+    mov ecx, b
+    mov edx, c
+    mov eax, sys_number
+    int 0x80
+
+stack: right -> left
+    push c
+    push b
+    push a
+    call f
+
+maybe some syscalls needs arguments in specifics register but i don't know about it yet

@@ -1,0 +1,21 @@
+.text -> code and is required.
+
+.data -> elements that are declared with an initial value and is optimal
+
+.bss -> elements that are declared with zero or null and is optimal.
+
+_start -> is like a main in C,default entry point to programs in assembly,but i can change this if i want to
+
+global _start -> is required before of the beggining of _start section to linker
+
+$ -> refer the current memory address for current line that compiler is reading
+
+$$ -> refer the memory address for the start of the current section 
+msg,len -> vars in .data are globals
+
+db -> "data byte" indicate that the assembler should just emit the literal bytes that follow
+
+len equ $ - msg -> Since the "current location" is just past the end of the string, you get the length there.
+
+equ -> is equal
+

@@ -1,0 +1,6 @@
+nasm -> compiler, this will take your code and convert it to byte code, like a pile of instructions but in binary
+
+
+ld -> linker, it copies out all the necessary functions that your program references and creates a single executable.
+
+liker has nothing to do with languages, even C or C++, compilers just generate the object files and the linker then takes them as input without ever knowing that language compiled them.
